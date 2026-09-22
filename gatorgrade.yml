@@ -1,0 +1,78 @@
+# Thirteen checks: six run your program, three read it as Python, two read its text, and two
+# read docs/summary.md.
+# The six program checks read only the field log at the end of a run, never the lines printed
+# along the way, and they forgive extra spaces, letter case, and a missing colon. Most of them
+# run your program a second time against a different list of readings, so a number counted by
+# eye and typed in passes only for the list it was counted from.
+
+- description: "[NOTES] The field log names you: TODO 1 saves the name, and TODO 6 prints FIELD LOG with it"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_field_notes.py::test_program_runs_and_log_names_you
+
+- description: "[NOTES] Readings matches the list, whatever its length: count it with len(levels), not by eye"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_field_notes.py::test_readings_counts_the_list
+
+- description: "[NOTES] First and Last come from the ends of the list: position 0, and position len(levels) - 1"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_field_notes.py::test_first_and_last_come_from_the_ends
+
+- description: "[NOTES] Highest is the largest reading, wherever it sits: start `highest` at levels[0] and compare on every trip"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_field_notes.py::test_highest_is_the_largest_reading
+
+- description: "[NOTES] Reached watch counts every reading at or above the level: the comparison is `>=`, not `>`"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_field_notes.py::test_reached_watch_counts_at_or_above
+
+- description: "[NOTES] Average is a whole number: divide the total with //, not /"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_field_notes.py::test_average_is_a_whole_number
+
+- description: "[CODE] len(...) is called: how many readings there are comes from the list, not from a number typed in"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_len_is_called
+
+- description: "[CODE] One for loop over the list: `for level in levels:` visits every reading"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_a_for_loop_over_the_list
+
+- description: "[CODE] The list is indexed, like levels[0]: the first and last readings are picked by position"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_the_list_is_indexed
+
+- src/main.py:
+  - description: "[CODE] No TODO markers remain: delete each TODO comment once its code is written, including Author"
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: "[CODE] At least five comments: explain why `highest` starts where it does, or why the average uses //"
+    check: CountSingleLineComments
+    options:
+      language: Python
+      count: 5
+      exact: false
+
+- docs/summary.md:
+  - description: "[SUMMARY] No TODO markers remain in docs/summary.md: replace each one with your answer, then delete it"
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: "[SUMMARY] At least 100 words in docs/summary.md: answer both questions in full sentences"
+    check: CountFileWords
+    options:
+      count: 100
+      exact: false
