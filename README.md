@@ -136,11 +136,6 @@ out wrong, what it said, what was expected, and the readings that were used.
 > [!NOTE]
 > Automated results are preliminary. Your instructor sets the final grade.
 
-## Summary writing
-
-Complete [`docs/summary.md`](docs/summary.md). Two questions, answered fully, with a minimum
-word count of `100`.
-
 ## Submitting
 
 Commit and push often. The last version pushed before the deadline is the one that gets
@@ -149,7 +144,7 @@ graded.
 **In the terminal:**
 
 ```text
-git add src/main.py docs/summary.md
+git add src/main.py
 git commit -m "Complete the French Creek field notes"
 git push
 ```

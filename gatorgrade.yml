@@ -1,5 +1,4 @@
-# Thirteen checks: six run your program, three read it as Python, two read its text, and two
-# read docs/summary.md.
+# Eleven checks: six run your program, three read it as Python, and two read its text.
 # The six program checks read only the field log at the end of a run, never the lines printed
 # along the way, and they forgive extra spaces, letter case, and a missing colon. Most of them
 # run your program a second time against a different list of readings, so a number counted by
@@ -64,15 +63,3 @@
       count: 5
       exact: false
 
-- docs/summary.md:
-  - description: "[SUMMARY] No TODO markers remain in docs/summary.md: replace each one with your answer, then delete it"
-    check: MatchFileFragment
-    options:
-      fragment: TODO
-      count: 0
-      exact: true
-  - description: "[SUMMARY] At least 100 words in docs/summary.md: answer both questions in full sentences"
-    check: CountFileWords
-    options:
-      count: 100
-      exact: false
