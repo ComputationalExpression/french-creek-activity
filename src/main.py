@@ -1,6 +1,6 @@
 """French Creek Field Notes.
 
-CMPSC 100: Computational Expression, Activity 3
+CMPSC 100: Computational Expression, Activity 5
 
 A week of gauge readings from French Creek, kept in one list. Read the list,
 walk it, and report on it.

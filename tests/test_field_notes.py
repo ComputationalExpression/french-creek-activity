@@ -1,4 +1,4 @@
-"""Automated checks for Activity 3: French Creek Field Notes.
+"""Automated checks for Activity 5: French Creek Field Notes.
 
 Every check reads the field log at the end of the run, never the lines
 printed along the way, so the wording is yours. Log values are matched

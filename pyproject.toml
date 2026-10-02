@@ -1,5 +1,5 @@
 [project]
-name = "activity-03-french-creek"
+name = "activity-05-french-creek"
 version = "1.0.0"
 requires-python = ">=3.11"
 dependencies = [

@@ -1,10 +1,9 @@
-# Activity 3: French Creek Field Notes
+# Activity 5: French Creek Field Notes
 
 |Item |       |
 |:----|:------|
-|Week |Week 6, Monday |
-|Type |In-class activity |
-|Due  |See the [course schedule](https://computationalexpression.com/schedule/) |
+|Released |Monday, October 12, in class |
+|Due |Wednesday, October 14, 9:50am |
 |Progress |[![Grade](../../actions/workflows/main.yml/badge.svg?branch=main)](../../actions/workflows/main.yml) |
 
 French Creek runs through Meadville on its way to the Allegheny River, and it holds more fish
@@ -12,7 +11,7 @@ species and more freshwater mussel species than any other creek in Pennsylvania.
 faculty and students have been studying its watershed for fifty years. Your program reads a
 week of gauge readings out of that work and reports on them.
 
-Everything here comes from today's session and the weeks before it. If a step confuses you,
+Everything here comes from the Week 6 and Week 7 lists sessions and the weeks before them. If a step confuses you,
 please ask about it while you are still in the room.
 
 ## Course learning outcomes
@@ -101,7 +100,7 @@ spaces and letter case, and any of the three ways to print a value passes:
 ## Getting started
 
 Open `src/main.py` and work through the `TODO` markers in order. Run it as you go, rather than
-writing the whole thing and running it once:
+writing all of it and running it once:
 
 ```text
 uv run python src/main.py

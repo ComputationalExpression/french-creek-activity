@@ -1,4 +1,4 @@
-# Eleven checks: six run your program, three read it as Python, and two read its text.
+# Ten checks: six run your program, two read it as Python, and two read its text.
 # The six program checks read only the field log at the end of a run, never the lines printed
 # along the way, and they forgive extra spaces, letter case, and a missing colon. Most of them
 # run your program a second time against a different list of readings, so a number counted by
@@ -34,20 +34,15 @@
   options:
     command: uv run pytest tests/test_field_notes.py::test_average_is_a_whole_number
 
-- description: "[CODE] len(...) is called: how many readings there are comes from the list, not from a number typed in"
+- description: "[CODE] len(...) is called and the list is indexed, like levels[0]: the count and the first and last readings come from the list"
   check: ExecuteCommand
   options:
-    command: uv run pytest tests/test_structure.py::test_len_is_called
+    command: uv run pytest tests/test_structure.py::test_len_is_called_and_the_list_is_indexed
 
 - description: "[CODE] One for loop over the list: `for level in levels:` visits every reading"
   check: ExecuteCommand
   options:
     command: uv run pytest tests/test_structure.py::test_a_for_loop_over_the_list
-
-- description: "[CODE] The list is indexed, like levels[0]: the first and last readings are picked by position"
-  check: ExecuteCommand
-  options:
-    command: uv run pytest tests/test_structure.py::test_the_list_is_indexed
 
 - src/main.py:
   - description: "[CODE] No TODO markers remain: delete each TODO comment once its code is written, including Author"
