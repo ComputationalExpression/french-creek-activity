@@ -18,18 +18,24 @@ def nodes(kind):
     return [n for n in ast.walk(tree()) if isinstance(n, kind)]
 
 
-def test_len_is_called_and_the_list_is_indexed():
-    called = [
-        n for n in nodes(ast.Call)
-        if isinstance(n.func, ast.Name) and n.func.id == "len"
-    ]
-    assert called, "found no call to len(...): how many readings there are comes from the list, not from a number typed in"
-    assert nodes(ast.Subscript), "found no indexing like levels[0]: the first and last readings are picked by position"
-
-
-def test_a_for_loop_over_the_list():
+def test_a_for_loop_over_the_list_and_a_while_loop():
     found = [
         loop for loop in nodes(ast.For)
         if isinstance(loop.iter, ast.Name) and loop.iter.id == "levels"
     ]
     assert found, "found no `for ... in levels:` loop: one pass down the list does the counting"
+    assert nodes(ast.While), "found no while loop: the days to fall below watch are counted with one"
+
+
+def test_append_and_a_two_sided_check():
+    appended = [
+        n for n in nodes(ast.Call)
+        if isinstance(n.func, ast.Attribute) and n.func.attr == "append"
+    ]
+    assert appended, "found no call to .append(...): watch_days is built one day at a time"
+    joined = [n for n in nodes(ast.BoolOp) if isinstance(n.op, ast.And)]
+    chained = [n for n in nodes(ast.Compare) if len(n.ops) == 2]
+    assert joined or chained, (
+        "found no two comparisons joined with and: the day looked up has to be "
+        "at least 1 and at most len(levels)"
+    )

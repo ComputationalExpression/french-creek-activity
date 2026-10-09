@@ -2,47 +2,48 @@
 # The six program checks read only the field log at the end of a run, never the lines printed
 # along the way, and they forgive extra spaces, letter case, and a missing colon. Most of them
 # run your program a second time against a different list of readings, so a number counted by
-# eye and typed in passes only for the list it was counted from.
+# eye and typed in passes only for the list it was counted from. A loop that never ends fails
+# its check after five seconds.
 
-- description: "[NOTES] The field log names you: TODO 1 saves the name, and TODO 6 prints FIELD LOG with it"
+- description: "[NOTES] The field log names you, and Readings matches the list whatever its length: count it with len(levels), not by eye"
   check: ExecuteCommand
   options:
-    command: uv run pytest tests/test_field_notes.py::test_program_runs_and_log_names_you
-
-- description: "[NOTES] Readings matches the list, whatever its length: count it with len(levels), not by eye"
-  check: ExecuteCommand
-  options:
-    command: uv run pytest tests/test_field_notes.py::test_readings_counts_the_list
+    command: uv run pytest tests/test_field_notes.py::test_log_names_you_and_counts_the_readings
 
 - description: "[NOTES] First and Last come from the ends of the list: position 0, and position len(levels) - 1"
   check: ExecuteCommand
   options:
     command: uv run pytest tests/test_field_notes.py::test_first_and_last_come_from_the_ends
 
-- description: "[NOTES] Highest is the largest reading, wherever it sits: start `highest` at levels[0] and compare on every trip"
+- description: "[NOTES] Highest is the largest reading and Average is a whole number: start `highest` at levels\\[0\\], and divide the total with //"
   check: ExecuteCommand
   options:
-    command: uv run pytest tests/test_field_notes.py::test_highest_is_the_largest_reading
+    command: uv run pytest tests/test_field_notes.py::test_highest_and_average
 
-- description: "[NOTES] Reached watch counts every reading at or above the level: the comparison is `>=`, not `>`"
+- description: "[NOTES] Watch days lists every day at or above the level, counting days from 1: add 1 to `day` before you append it, and compare with >="
   check: ExecuteCommand
   options:
-    command: uv run pytest tests/test_field_notes.py::test_reached_watch_counts_at_or_above
+    command: uv run pytest tests/test_field_notes.py::test_watch_days_lists_the_days_at_or_above
 
-- description: "[NOTES] Average is a whole number: divide the total with //, not /"
+- description: "[NOTES] Day lookup counts from 1 and says none outside the week: day 1 is levels\\[0\\], so use levels\\[lookup - 1\\] after the range check"
   check: ExecuteCommand
   options:
-    command: uv run pytest tests/test_field_notes.py::test_average_is_a_whole_number
+    command: uv run pytest tests/test_field_notes.py::test_day_lookup_counts_from_one
 
-- description: "[CODE] len(...) is called and the list is indexed, like levels[0]: the count and the first and last readings come from the list"
+- description: "[NOTES] Days to fall below watch counts the trips of a while loop from the highest reading: subtract 4 on every trip, and keep going while it is >= watch"
   check: ExecuteCommand
   options:
-    command: uv run pytest tests/test_structure.py::test_len_is_called_and_the_list_is_indexed
+    command: uv run pytest tests/test_field_notes.py::test_days_to_fall_below_watch
 
-- description: "[CODE] One for loop over the list: `for level in levels:` visits every reading"
+- description: "[CODE] One for loop over the list and one while loop: `for level in levels:` visits every reading"
   check: ExecuteCommand
   options:
-    command: uv run pytest tests/test_structure.py::test_a_for_loop_over_the_list
+    command: uv run pytest tests/test_structure.py::test_a_for_loop_over_the_list_and_a_while_loop
+
+- description: "[CODE] watch_days is built with append, and the day check joins two comparisons with and"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_append_and_a_two_sided_check
 
 - src/main.py:
   - description: "[CODE] No TODO markers remain: delete each TODO comment once its code is written, including Author"
@@ -51,10 +52,9 @@
       fragment: TODO
       count: 0
       exact: true
-  - description: "[CODE] At least five comments: explain why `highest` starts where it does, or why the average uses //"
+  - description: "[CODE] At least five comments: explain why `day` counts from 1, or why the while loop can make zero trips"
     check: CountSingleLineComments
     options:
       language: Python
       count: 5
       exact: false
-

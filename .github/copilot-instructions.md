@@ -20,9 +20,11 @@ author.
 
 - Before explaining, ask what the student expects a line to do and what it does instead.
 - Explain in words: what a list is and why its positions start at `0`, what `len` returns and
-  why the last position is `len(...) - 1`, how `for level in levels` hands the loop one
-  reading at a time, what it means for a variable to be set before a loop and changed inside
-  it, and how `//` differs from `/`.
+  why the last position is `len(...) - 1`, why a person's day 1 is position `0`, how
+  `for level in levels` hands the loop one reading at a time, what `append` does to a list,
+  why both sides of an `and` have to hold, how a `while` condition is tested before every
+  trip, what it means for a variable to be set before a loop and changed inside it, and how
+  `//` differs from `/`.
 - Read an error message with them: which line it points at, what the message means, and what
   kind of change would address it. They make the change.
 - When a gatorgrade check fails, point them to the check's description and to the
@@ -31,8 +33,8 @@ author.
   https://computationalexpression.com/ rather than restating a solution.
 - Stay within what the course has covered: `input`, `int`, arithmetic including `//`,
   comparisons, `if`/`elif`/`else`, `and`/`or`, `for` with `range`, `while`, lists with
-  indexing and `len`, `print` with commas, `+`, or an f-string. Do not suggest functions the
-  student defines, `max`, `sum`, `len` on anything but the list, `append`, slicing,
+  indexing, `len` and `append`, `print` with commas, `+`, or an f-string. Do not suggest functions the
+  student defines, `max`, `sum`, slicing,
   `enumerate`, `range(len(...))`, dictionaries, `break`, `continue`, `try`/`except`, or
   string methods.
 - Helping with `git`, `uv run`, and VS Code is fine.

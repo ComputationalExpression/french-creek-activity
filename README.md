@@ -11,8 +11,10 @@ species and more freshwater mussel species than any other creek in Pennsylvania.
 faculty and students have been studying its watershed for fifty years. Your program reads a
 week of gauge readings out of that work and reports on them.
 
-Everything here comes from the Week 6 and Week 7 lists sessions and the weeks before them. If a step confuses you,
-please ask about it while you are still in the room.
+This activity is practice for Concept Checkpoint 2 on Wednesday, and the
+[Checkpoint 2 review page](https://computationalexpression.com/checkpoints/checkpoint-2/)
+lists every topic the checkpoint covers. If a step confuses you, please ask about it while you
+are still in the room.
 
 ## Course learning outcomes
 
@@ -28,8 +30,11 @@ Specifically, by the end of this activity you should be able to:
 
 * read how many items a list holds with `len`
 * pick an item out of a list by position, including the last one
+* turn a person's day number into a list position
 * visit every item of a list with `for item in a_list`
-* set a variable before a loop and change it inside the loop, to count and to compare
+* build a list inside a loop with `append`
+* join two comparisons with `and`
+* count the trips of a `while` loop
 * choose between `/` and `//` for the result you want
 
 ## The problem
@@ -44,8 +49,8 @@ levels = [31, 34, 52, 68, 45, 39, 36]
 it reports from the list itself. A number counted by eye and typed in is right until the list
 changes, and the automated checks run your program against a different list.
 
-Your program asks for a name and a watch level, prints the first and last readings, walks the
-list once, and ends with a field log holding six values:
+Your program asks for a name, a watch level and a day to look up, prints the first and last
+readings, walks the list once, and ends with a field log holding nine values:
 
 |Value |Where it comes from |
 |:-----|:-------------------|
@@ -53,14 +58,19 @@ list once, and ends with a field log holding six values:
 |`First` |The reading at position `0` |
 |`Last` |The reading at the last position, whatever the length |
 |`Highest` |The largest reading |
-|`Reached watch` |How many readings are at or above the watch level |
 |`Average` |The total divided by how many readings, as a whole number |
+|`Watch days` |A list of the day numbers whose reading is at or above the watch level |
+|`Reached watch` |How many items `Watch days` holds |
+|`Day lookup` |The reading for the day asked for, or `none` for a day outside the list |
+|`Days to fall below watch` |How many days the creek takes to drop below the watch level from its highest reading |
 
-A reading exactly at the watch level counts as having reached it. The average uses `//`, so
-`305` across seven readings is `43` rather than `43.57142857142857`.
+Days count from 1, so day 1 is the reading at position `0`. A reading exactly at the watch level
+counts as having reached it. The average uses `//`, so `305` across seven readings is `43`
+rather than `43.57142857142857`.
 
-One pass down the list is enough for the last three values. Counting, comparing, and totaling
-can all happen on the same trip.
+One pass down the list is enough for `Highest`, `Average` and `Watch days`. After that, the creek
+falls 4 a day from its highest reading: count the trips of a `while` loop that subtracts 4 for
+as long as the level is at or above the watch level.
 
 ### Example run
 
@@ -71,15 +81,16 @@ FRENCH CREEK FIELD NOTES
 ==================================================
 What is your name? JJ
 What is the watch level this week? 50
+Which day do you want to look up? 4
 First reading: 31
 Last reading: 36
-Reading: 31
-Reading: 34
-Reading: 52
-Reading: 68
-Reading: 45
-Reading: 39
-Reading: 36
+Day 1 reading: 31
+Day 2 reading: 34
+Day 3 reading: 52
+Day 4 reading: 68
+Day 5 reading: 45
+Day 6 reading: 39
+Day 7 reading: 36
 
 ==================================================
 FIELD LOG: JJ
@@ -88,14 +99,20 @@ Readings: 7
 First: 31
 Last: 36
 Highest: 68
-Reached watch: 2
 Average: 43
+Watch days: [3, 4]
+Reached watch: 2
+Day lookup: 68
+Days to fall below watch: 5
 ```
 
 Your wording is yours. The checks read only the field log at the end, they forgive extra
 spaces and letter case, and any of the three ways to print a value passes:
 `print("Highest:", highest)`, `print("Highest: " + str(highest))`, or
 `print(f"Highest: {highest}")`.
+
+Ask the three questions in this order: name, watch level, day. A loop that never ends fails its
+check after five seconds.
 
 ## Getting started
 
